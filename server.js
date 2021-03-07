@@ -57,6 +57,7 @@ const prefix = "/api";
 app.route(prefix + "/matieres").get(matiere.getMatieres);
 
 app.route(prefix + "/assignments").get(assignment.getAssignments);
+app.route(prefix + "/assignmentss").get(assignment.getAssignmentss);
 app.route(prefix + "/users").get(user.getUsers);
 
 app

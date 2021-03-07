@@ -1,20 +1,20 @@
 let Assignment = require("../model/assignment");
 
-/*
-// Récupérer tous les assignments (GET)
-function getAssignments(req, res){
-    Assignment.find((err, assignments) => {
-        if(err){
-            res.send(err)
-        }
 
-        res.send(assignments);
-    });
+//Récupérer tous les assignments (GET)
+function getAssignmentss(req, res) {
+  let assignmentId = req.params.id;
+
+  Assignment.find({ rendu: false }, (err, assignment) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(assignment);
+  });
 }
-*/
 // AVEC PAGINATION
 function getAssignments(req, res) {
-  var aggregateQuery = Assignment.aggregate();
+  var aggregateQuery = Assignment.aggregate([{$match: { rendu: true }}]);
   Assignment.aggregatePaginate(
     aggregateQuery,
     {
@@ -99,6 +99,7 @@ function deleteAssignment(req, res) {
 
 module.exports = {
   getAssignments,
+  getAssignmentss,
   postAssignment,
   getAssignment,
   updateAssignment,
